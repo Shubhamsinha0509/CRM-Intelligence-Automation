@@ -45,7 +45,7 @@ The MVP covers **audit** and **safe cleanup**, and recommends **prevention** (re
 
 ```text
 HubSpot data → Sync → Detect issues → Prioritize → Recommend
-             → Human approval → Execute → Audit log (with rollback)
+             → Human approval → Execute → Audit log (rollback where supported)
 ```
 
 ## MVP Scope
@@ -55,8 +55,8 @@ HubSpot data → Sync → Detect issues → Prioritize → Recommend
 * Read-only audit of HubSpot contacts, companies, and deals: data quality, duplicates, stale records, fill rates, health score
 * Client-readable audit report
 * Deterministic recommendations, including prevention advice
-* Approval flow; audit log with previous values and rollback
-* Two safe workflows: owner assignment and follow-up task creation
+* Approval flow; audit log with previous values, rollback where supported
+* Three safe workflows: owner assignment, follow-up task creation, and human-approved duplicate merge (Contacts and Companies only)
 * Sales-ops detection: neglected leads, stuck/inactive deals, missing deal information
 * AI for issue explanations and health summaries
 * Thin dashboard
@@ -66,7 +66,7 @@ HubSpot data → Sync → Detect issues → Prioritize → Recommend
 * CRM replacement or multiple CRM providers
 * Generic automation platform or trigger/condition/action DSL
 * Agent layer and natural-language analysis
-* Duplicate auto-merge
+* Unattended/automatic duplicate merge (merge always requires explicit human approval per pair)
 * SaaS billing and multi-tenancy
 * Unrestricted AI execution
 * CI/CD and deployment (stretch)
@@ -77,13 +77,27 @@ Delivery is in vertical slices; see `roadmap.md`.
 
 * **Duplicate detection** treated as entity resolution, measured with precision and recall.
 * **Issue prioritization** as an explainable score.
-* **Reliable execution:** idempotent, retry-safe, with revalidation before applying an approved change and rollback.
+* **Reliable execution:** idempotent, retry-safe, with revalidation before applying an approved change; rollback where the underlying API supports it (see Duplicate Merge Workflow for the merge exception).
 * **Evaluation data:** a synthetic B2B dataset with labelled, injected defects. The data generator is kept separate from the detectors to avoid circular evaluation.
 * **AI evaluated** against ground truth.
 
 ## AI Boundaries
 
 AI may explain issues and summarize CRM health. CRM rules and detection are deterministic. AI performs no CRM writes. CRM data sent to an LLM is minimized and redacted.
+
+## Duplicate Merge Workflow
+
+Scope: human-approved merge applies to **Contacts and Companies only**. Deals are excluded from the MVP merge workflow.
+
+Candidate source: merge candidates come from the duplicate detection / entity-resolution layer (task 1.6). The merge workflow does not implement a second, independent matching system.
+
+Approval model: the system presents a diff of the two records and suggests a primary record — the record with more populated properties wins; ties break to the older record by `createdAt`. The user can override the suggested primary, then must explicitly approve or reject the merge as a whole. There is no field-by-field value selection.
+
+Merge execution: HubSpot performs the actual field conflict resolution on merge. The UI must clearly show which secondary-record values may be discarded under HubSpot's merge behavior, and make the irreversible nature of the operation explicit before approval.
+
+Rollback exception: HubSpot record merges cannot be automatically undone through the API. Unlike the other approved workflows, merges are not rollback-capable — instead, the system stores a complete pre-merge snapshot of the affected records and their associations for auditability and manual reconstruction. This is not automatic rollback.
+
+Retry/recovery: an uncertain merge request (e.g., response lost after send) is not blindly retried. The current state of the records is checked first; an already-completed merge is treated as a reconciliation case, not reissued.
 
 ## Technical Direction
 
@@ -108,7 +122,7 @@ Separation of responsibilities, validation, testing, security, error handling, o
 4. Detect duplicates with measured precision and recall.
 5. Prioritize issues.
 6. Recommend corrective and preventive actions.
-7. Execute approved workflows with rollback.
+7. Execute approved workflows with rollback where supported.
 8. Handle failures and retries safely.
 9. Maintain an audit trail.
 10. Provide meaningful, evaluated AI assistance.

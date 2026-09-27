@@ -11,8 +11,8 @@ Timeline: 10 weeks, solo.
 ## Slice 0 — Foundation (Week 1)
 
 * [x] 0.1 Define primary user (consultant operates; client receives results)
-* [ ] 0.2 Define problem, target client, MVP boundary
-* [ ] 0.3 Study HubSpot objects/API; create free HubSpot account
+* [x] 0.2 Define problem, target client, MVP boundary
+* [x] 0.3 Study HubSpot objects/API; create free HubSpot account
 * [ ] 0.4 Design synthetic messy dataset + evaluation plan (labelled ground truth)
 * [ ] 0.5 Decide architecture: sync strategy, CRM adapter boundary, job queue
 * [ ] 0.6 Initialize repo (outside OneDrive), backend skeleton, testing, PostgreSQL
@@ -35,11 +35,14 @@ First sellable product.
 
 * [ ] 2.1 Deterministic recommendation model (incl. prevention advice)
 * [ ] 2.2 Approval flow (API + minimal UI)
-* [ ] 2.3 Audit log with previous values + rollback
+* [ ] 2.3 Audit log with previous values + rollback where supported
 * [ ] 2.4 Workflow: lead/contact owner assignment
 * [ ] 2.5 Sales-ops detectors: neglected leads, stuck/inactive deals, missing deal info
 * [ ] 2.6 Workflow: follow-up task creation
-* [ ] 2.7 Retries, idempotency, stale-recommendation revalidation, failure tests
+* [ ] 2.7 Workflow: human-approved duplicate merge for Contacts/Companies (candidates from 1.6; diff + suggested primary; pre-merge snapshot, not automatic rollback; reconciliation check before retrying an uncertain merge — see `project.md`)
+* [ ] 2.8 Retries, idempotency, stale-recommendation revalidation, failure tests
+
+*2.7 is time-boxed to this slice. If the merge workflow isn't reliably demoable within Weeks 5–6, prioritize 2.4 and 2.6 for the Slice 2 demo and move duplicate merge to a later slice as stretch.*
 
 ## Slice 3 — AI (Week 7)
 
@@ -77,5 +80,5 @@ First sellable product.
 * Agent layer
 * Salesforce adapter
 * Natural-language analysis
-* Duplicate merge
+* Automatic/bulk duplicate merge (unattended, no per-pair approval)
 * CI/CD and deployment
