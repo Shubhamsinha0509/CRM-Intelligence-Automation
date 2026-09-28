@@ -73,6 +73,18 @@ HubSpot data → Sync → Detect issues → Prioritize → Recommend
 
 Delivery is in vertical slices; see `roadmap.md`.
 
+## Why Not Just Use HubSpot's Native Tools
+
+HubSpot's own duplicate management (ML-based) and data quality automation (field formatting rules) exist only on **Data Hub Professional ($720/mo) and Enterprise ($2,000/mo)**. Free and Starter tiers — where the target client (small B2B, no dedicated RevOps person) actually sits — have none of this.
+
+Even on Pro/Enterprise, the native tools don't close the gap this project targets:
+
+* Native dedup is manual-cleanup-scale, not built for automated, multi-object deduplication (contacts + companies + deals together).
+* Native data quality automation is per-field formatting (capitalization, phone/date format) — not issue prioritization, not a health score, not a client-readable report.
+* There is no native synthesis layer that scores, ranks, and explains CRM health across problem types. HubSpot users have open feature requests asking for exactly this.
+
+This project is not duplicating a HubSpot feature — it targets the tier HubSpot doesn't sell data quality tooling to, and adds a prioritization/explanation/reporting layer HubSpot doesn't offer at any tier.
+
 ## Technical Core and Evaluation
 
 * **Duplicate detection** treated as entity resolution, measured with precision and recall.
