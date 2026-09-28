@@ -69,7 +69,7 @@ First sellable product.
 
 ## Freelance track (non-code, parallel)
 
-* [ ] F.1 HubSpot Academy free certification(s)
+* [-] F.1 HubSpot Academy free certification(s) — Revenue Operations Certification in progress
 * [ ] F.2 Audit report template + discovery questionnaire
 * [ ] F.3 Outreach: 1–2 discounted read-only audits (from Week 5)
 * [ ] F.4 First paid engagement
