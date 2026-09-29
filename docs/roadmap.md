@@ -13,7 +13,7 @@ Timeline: 10 weeks, solo.
 * [x] 0.1 Define primary user (consultant operates; client receives results)
 * [x] 0.2 Define problem, target client, MVP boundary
 * [x] 0.3 Study HubSpot objects/API; create free HubSpot account
-* [ ] 0.4 Design synthetic messy dataset + evaluation plan (labelled ground truth)
+* [x] 0.4 Design synthetic messy dataset + evaluation plan (labelled ground truth)
 * [ ] 0.5 Decide architecture: sync strategy, CRM adapter boundary, job queue
 * [ ] 0.6 Initialize repo (outside OneDrive), backend skeleton, testing, PostgreSQL
 
