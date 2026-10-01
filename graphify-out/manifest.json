@@ -1,50 +1,44 @@
 {
   "CLAUDE.md": {
-    "mtime": 1790272444.8643749,
-    "seen": 1790887432.2378948,
-    "ast_hash": "dd17dec566ec065ac4d191e307aac181",
-    "semantic_hash": "dd17dec566ec065ac4d191e307aac181"
+    "mtime": 1790894749.265946,
+    "seen": 1790896166.2894707,
+    "ast_hash": "c12c2ef461ac272d3eb711f55ca095ee",
+    "semantic_hash": "c12c2ef461ac272d3eb711f55ca095ee"
   },
   "README.md": {
-    "mtime": 1790272441.3720822,
-    "seen": 1790887432.2378986,
-    "ast_hash": "a1fed50bb47aca434838bda5349f5eb8",
-    "semantic_hash": "a1fed50bb47aca434838bda5349f5eb8"
+    "mtime": 1790894761.0150504,
+    "seen": 1790896166.2894747,
+    "ast_hash": "4349edac2695260ff03471377aca802d",
+    "semantic_hash": "4349edac2695260ff03471377aca802d"
   },
   "docs/architecture.md": {
-    "mtime": 1790886258.3667994,
-    "seen": 1790887432.2379003,
-    "ast_hash": "4dd4fb2f85b11a60264da3a96fbae492",
-    "semantic_hash": "4dd4fb2f85b11a60264da3a96fbae492"
+    "mtime": 1790895451.4079504,
+    "seen": 1790896166.2894766,
+    "ast_hash": "2093c16e716342928b6ba395c8c2af39",
+    "semantic_hash": "2093c16e716342928b6ba395c8c2af39"
   },
   "docs/dataset-and-evaluation-plan.md": {
-    "mtime": 1790678403.787808,
-    "seen": 1790887432.237901,
-    "ast_hash": "b970b24c4aa404fb7cd8c1264f6f7c55",
-    "semantic_hash": "b970b24c4aa404fb7cd8c1264f6f7c55"
-  },
-  "docs/decisions/0001-sync-adapter-queue.md": {
-    "mtime": 1790885833.9233003,
-    "seen": 1790887432.237902,
-    "ast_hash": "33bf810c7c6e3b1ad7a64ffdbc123a05",
-    "semantic_hash": "33bf810c7c6e3b1ad7a64ffdbc123a05"
+    "mtime": 1790895443.768368,
+    "seen": 1790896166.2894773,
+    "ast_hash": "eb28d4d21836a16870d59a6b8b11e439",
+    "semantic_hash": "eb28d4d21836a16870d59a6b8b11e439"
   },
   "docs/hubspot-api-notes.md": {
-    "mtime": 1790541962.5047195,
-    "seen": 1790887432.2379026,
-    "ast_hash": "f1983f608659eeec74f7612409db1375",
-    "semantic_hash": "f1983f608659eeec74f7612409db1375"
+    "mtime": 1790895448.919281,
+    "seen": 1790896166.2894785,
+    "ast_hash": "3b57fb6aa8e0c8168942feb1d947bef9",
+    "semantic_hash": "3b57fb6aa8e0c8168942feb1d947bef9"
   },
   "docs/project.md": {
-    "mtime": 1790626772.608878,
-    "seen": 1790887432.237903,
-    "ast_hash": "6f7a30e8e4a9ef3ce80e1b8d97f4643b",
-    "semantic_hash": "6f7a30e8e4a9ef3ce80e1b8d97f4643b"
+    "mtime": 1790895455.0076232,
+    "seen": 1790896166.2894795,
+    "ast_hash": "f77792c12fe1ddf7c7554d4f1e8f6705",
+    "semantic_hash": "f77792c12fe1ddf7c7554d4f1e8f6705"
   },
   "docs/roadmap.md": {
-    "mtime": 1790885837.8857918,
-    "seen": 1790887432.2379038,
-    "ast_hash": "a927f09316ab2387135b0829479657de",
-    "semantic_hash": "a927f09316ab2387135b0829479657de"
+    "mtime": 1790895454.9684937,
+    "seen": 1790896166.2894802,
+    "ast_hash": "8157e700047396465896250d830e81cf",
+    "semantic_hash": "8157e700047396465896250d830e81cf"
   }
 }

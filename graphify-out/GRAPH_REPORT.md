@@ -1,99 +1,90 @@
 # Graph Report - CRM-Intelligence & Automation  (2026-10-02)
 
 ## Corpus Check
-- Corpus is ~6,187 words - fits in a single context window. You may not need a graph.
+- 7 files · ~2,367 words
+- Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 58 nodes · 61 edges · 16 communities (6 shown, 10 thin omitted)
-- Extraction: 90% EXTRACTED · 10% INFERRED · 0% AMBIGUOUS · INFERRED: 6 edges (avg confidence: 0.85)
-- Token cost: 0 input · 112,993 output
+- 52 nodes · 36 edges · 21 communities (3 shown, 18 thin omitted)
+- Extraction: 44% EXTRACTED · 56% INFERRED · 0% AMBIGUOUS · INFERRED: 20 edges (avg confidence: 0.88)
+- Token cost: 0 input · 91,593 output
 
 ## Community Hubs (Navigation)
-- Project Overview & Sync Design
-- MVP Scope & HubSpot Integration
-- Sync & Action Run Architecture
-- Rate Limiting & Retry Safety
-- Adapter Boundary & Separation
-- Duplicate Detection & Merge
-- Evaluation Metrics & Success Criteria
-- AI Boundaries & Determinism
-- HubSpot Private App Auth
-- Freelance Track
-- Roadmap Slice 3
-- Roadmap Slice 4
-- Roadmap Slice 5
-- Stretch Goals
+- Project Overview & Docs Policy
+- HubSpot Module & API Guidelines
+- Detection Approach & Coding Rules
+- MVP Scope & Roadmap Slices
+- Dataset Plan & Project Status
+- Fixes Component & Target Users
+- Architecture Overview & Tech Stack
+- Data Pull & Pagination
+- Evaluation Methodology
+- Completion Checklist
+- Git Workflow
+- Verification Steps
+- Pipeline Architecture
+- Report Dashboard
+- Scoring Component
+- HubSpot Associations API
+- How It Works
+- Problems Solved
+- Success Criteria
+- Target Client
 
 ## God Nodes (most connected - your core abstractions)
-1. `ADR 0001: Sync Strategy, Adapter Boundary, Job Queue` - 7 edges
-2. `Sync Strategy (on-demand, queued)` - 5 edges
-3. `Slice 1 — Read-Only Audit` - 5 edges
-4. `Audit Important Actions, Require Approval for Destructive Changes` - 4 edges
-5. `Documentation Map (project/roadmap/architecture/decisions/workflows)` - 4 edges
-6. `SyncRun Record` - 4 edges
-7. `Job Queue (pg-boss)` - 4 edges
-8. `ActionRun Record` - 4 edges
-9. `Mapper Structural Validation` - 4 edges
-10. `CRM RevOps Intelligence & Automation Platform (Project Definition)` - 4 edges
+1. `CRM RevOps Intelligence & Automation Platform (Product Definition)` - 5 edges
+2. `MVP Scope` - 4 edges
+3. `Approach` - 4 edges
+4. `Documentation Policy` - 3 edges
+5. `Project Overview (README)` - 3 edges
+6. `HubSpot Module` - 3 edges
+7. `Detectors Component` - 3 edges
+8. `HubSpot Rate Limits (429)` - 3 edges
+9. `Roadmap Overview (10-Week Solo Timeline)` - 3 edges
+10. `Before Coding Workflow` - 2 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Audit Important Actions, Require Approval for Destructive Changes` --rationale_for--> `Duplicate Merge Workflow`  [INFERRED]
+- `Core Rule: One Task at a Time` --semantically_similar_to--> `Guiding Principle`  [INFERRED] [semantically similar]
   CLAUDE.md → docs/project.md
-- `Audit Important Actions, Require Approval for Destructive Changes` --rationale_for--> `ActionRun Record`  [INFERRED]
+- `Before Coding Workflow` --references--> `CRM RevOps Intelligence & Automation Platform (Product Definition)`  [EXTRACTED]
+  CLAUDE.md → docs/project.md
+- `During Coding Guidelines` --conceptually_related_to--> `Approach`  [INFERRED]
+  CLAUDE.md → docs/project.md
+- `CRM / HubSpot Guidelines` --conceptually_related_to--> `HubSpot Module`  [INFERRED]
   CLAUDE.md → docs/architecture.md
-- `Audit Important Actions, Require Approval for Destructive Changes` --rationale_for--> `SyncRun Record`  [INFERRED]
-  CLAUDE.md → docs/architecture.md
-- `Engineering Goals` --conceptually_related_to--> `Audit Important Actions, Require Approval for Destructive Changes`  [EXTRACTED]
-  docs/project.md → CLAUDE.md
-- `Roadmap Document` --references--> `Core Rule: One Task at a Time`  [EXTRACTED]
-  docs/roadmap.md → CLAUDE.md
+- `CRM / HubSpot Guidelines` --conceptually_related_to--> `HubSpot Rate Limits (429)`  [INFERRED]
+  CLAUDE.md → docs/hubspot-api-notes.md
 
 ## Hyperedges (group relationships)
-- **Sync Pipeline Design System** — docs_architecture_sync_strategy, docs_architecture_hubspotclient, docs_architecture_job_queue, docs_decisions_0001_sync_adapter_queue_adr, docs_hubspot_api_notes_rate_limits [INFERRED 0.85]
-- **Duplicate Merge Workflow Group** — docs_project_duplicate_merge_workflow, docs_hubspot_api_notes_merge, docs_roadmap_slice2, docs_dataset_and_evaluation_plan_defect_taxonomy [INFERRED 0.80]
-- **CLAUDE.md Governing Principles** — claude_hubspot_adapter_rule, claude_deterministic_ai_rule, claude_retry_safety_rule, claude_audit_approval_rule, claude_separation_of_concerns_rule [EXTRACTED 1.00]
+- **Audit Pipeline Components** — docs_architecture_hubspot_module, docs_architecture_pull, docs_architecture_detectors, docs_architecture_scoring, docs_architecture_report_dashboard, docs_architecture_fixes, docs_architecture_ai_summary [EXTRACTED 1.00]
+- **AI and Write Safety Guardrails** — claude_during_coding, claude_crm_hubspot_guidelines, docs_project_approach, docs_architecture_ai_summary [INFERRED 0.85]
+- **Ten-Week Roadmap Slices** — docs_roadmap_slice0, docs_roadmap_slice1, docs_roadmap_slice2, docs_roadmap_slice3, docs_roadmap_slice4 [EXTRACTED 1.00]
 
-## Communities (16 total, 10 thin omitted)
+## Communities (21 total, 18 thin omitted)
 
-### Community 0 - "Project Overview & Sync Design"
-Cohesion: 0.24
-Nodes (8): Documentation Map (project/roadmap/architecture/decisions/workflows), Pagination Checkpointing, Sync Strategy (on-demand, queued), ADR 0001: Sync Strategy, Adapter Boundary, Job Queue, Cursor-Based Pagination, CRM RevOps Intelligence & Automation Platform (Project Definition), Roadmap Document, CRM RevOps Intelligence & Automation Platform (README)
+### Community 0 - "Project Overview & Docs Policy"
+Cohesion: 0.43
+Nodes (6): Before Coding Workflow, Documentation Policy, CRM RevOps Intelligence & Automation Platform (Product Definition), Freelance Track, Roadmap Overview (10-Week Solo Timeline), Project Overview (README)
 
-### Community 1 - "MVP Scope & HubSpot Integration"
-Cohesion: 0.22
-Nodes (8): HubSpotClient Adapter Module, Mapper Structural Validation, Synthetic Dataset Generator, Associations API, HubSpot Objects in Scope (Contacts/Companies/Deals), MVP Scope, Slice 0 — Foundation, Slice 1 — Read-Only Audit
-
-### Community 2 - "Sync & Action Run Architecture"
+### Community 1 - "HubSpot Module & API Guidelines"
 Cohesion: 0.38
-Nodes (4): ActionRun Record, Job Queue (pg-boss), SyncRun Record, Technical Direction / Stack
+Nodes (5): HubSpot Module, HubSpot CRM Objects API, HubSpot API Documentation Sources, HubSpot CRM API -- Companies Guide, HubSpot API Usage Guidelines and Limits
 
-### Community 3 - "Rate Limiting & Retry Safety"
-Cohesion: 0.33
-Nodes (3): Dual-Cap Reactive Rate Limiting, HubSpot Rate Limits (burst/daily tiers), Engineering Goals
-
-### Community 5 - "Duplicate Detection & Merge"
-Cohesion: 0.50
-Nodes (5): Defect Taxonomy (D1-D9), Native Merge Endpoint Behavior, Duplicate Merge Workflow, CRM Problems Taxonomy, Slice 2 — Safe Actions
-
-### Community 6 - "Evaluation Metrics & Success Criteria"
-Cohesion: 0.67
-Nodes (3): Evaluation Metrics Plan (precision/recall/F1), Ground Truth Labelling File, Success Criteria
+### Community 3 - "MVP Scope & Roadmap Slices"
+Cohesion: 0.29
+Nodes (6): Not Included (Stretch) List, Synthetic Dataset Specification, MVP Scope, Slice 1 -- Audit and Report, Slice 2 -- Approved Fixes, Slice 3 -- AI Summary and Dashboard
 
 ## Knowledge Gaps
-- **14 isolated node(s):** `HubSpotClient Adapter Module`, `Dual-Cap Reactive Rate Limiting`, `Associations API`, `Private App Token Authentication`, `CRM Problems Taxonomy` (+9 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 24 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **10 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **24 isolated node(s):** `Verification Steps`, `Git Commit Workflow`, `Completion Checklist`, `Slice 0 Foundation Status`, `Audit Pipeline Flow` (+19 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 34 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **18 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `ADR 0001: Sync Strategy, Adapter Boundary, Job Queue` connect `Project Overview & Sync Design` to `MVP Scope & HubSpot Integration`, `Rate Limiting & Retry Safety`, `Duplicate Detection & Merge`?**
-  _High betweenness centrality (0.305) - this node is a cross-community bridge._
-- **Why does `MVP Scope` connect `MVP Scope & HubSpot Integration` to `Adapter Boundary & Separation`?**
-  _High betweenness centrality (0.160) - this node is a cross-community bridge._
-- **Why does `Slice 1 — Read-Only Audit` connect `MVP Scope & HubSpot Integration` to `Duplicate Detection & Merge`?**
-  _High betweenness centrality (0.131) - this node is a cross-community bridge._
-- **Are the 3 inferred relationships involving `Audit Important Actions, Require Approval for Destructive Changes` (e.g. with `ActionRun Record` and `SyncRun Record`) actually correct?**
-  _`Audit Important Actions, Require Approval for Destructive Changes` has 3 INFERRED edges - model-reasoned connections that need verification._
-- **What connects `HubSpotClient Adapter Module`, `Dual-Cap Reactive Rate Limiting`, `Associations API` to the rest of the system?**
-  _14 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Are the 4 inferred relationships involving `MVP Scope` (e.g. with `Not Included (Stretch) List` and `Slice 1 -- Audit and Report`) actually correct?**
+  _`MVP Scope` has 4 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 4 inferred relationships involving `Approach` (e.g. with `During Coding Guidelines` and `AI Summary Component`) actually correct?**
+  _`Approach` has 4 INFERRED edges - model-reasoned connections that need verification._
+- **What connects `Verification Steps`, `Git Commit Workflow`, `Completion Checklist` to the rest of the system?**
+  _24 weakly-connected nodes found - possible documentation gaps or missing edges._
