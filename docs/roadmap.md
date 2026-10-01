@@ -14,7 +14,7 @@ Timeline: 10 weeks, solo.
 * [x] 0.2 Define problem, target client, MVP boundary
 * [x] 0.3 Study HubSpot objects/API; create free HubSpot account
 * [x] 0.4 Design synthetic messy dataset + evaluation plan (labelled ground truth)
-* [ ] 0.5 Decide architecture: sync strategy, CRM adapter boundary, job queue
+* [x] 0.5 Decide architecture: sync strategy, CRM adapter boundary, job queue
 * [ ] 0.6 Initialize repo (outside OneDrive), backend skeleton, testing, PostgreSQL
 
 ## Slice 1 — Read-only audit (Weeks 2–4)
