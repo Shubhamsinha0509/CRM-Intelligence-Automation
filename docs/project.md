@@ -64,7 +64,7 @@ HubSpot has native tools for parts of this, and the tier determines what is avai
 
 ## Approach
 
-* **Simple HubSpot client:** one module talks to HubSpot (Private App token). It retries on rate limits (429). Each audit does a full pull into PostgreSQL, using upserts so re-running is safe.
+* **Simple HubSpot client:** one module talks to HubSpot (Private App token). It retries on rate limits (429). Each audit does a full pull into SQLite, using upserts so re-running is safe.
 * **Deterministic detectors:** plain rules, no AI. Duplicates use simple matching (exact email, normalized company domain and name).
 * **Evidence of quality:** a synthetic messy CRM with known, labelled defects (`docs/dataset-and-evaluation-plan.md`). Report precision/recall for the detectors and show a before/after score.
 * **Safe writes:** every CRM change needs approval and is logged.
@@ -73,7 +73,7 @@ HubSpot has native tools for parts of this, and the tier determines what is avai
 ## Technical Direction
 
 * Backend: Node.js, TypeScript, Express
-* Database: PostgreSQL, Prisma
+* Database: SQLite, Prisma
 * UI: simple server-rendered pages from the same Express app (no separate frontend)
 * CRM: HubSpot
 * AI: LLM API

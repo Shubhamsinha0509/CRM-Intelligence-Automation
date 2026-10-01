@@ -14,7 +14,7 @@
 * [x] 0.2 Define problem, target client, MVP boundary
 * [x] 0.3 Study HubSpot objects/API; create free HubSpot account
 * [x] 0.4 Design synthetic messy dataset + evaluation plan
-* [ ] 0.5 Initialize repo (outside OneDrive), backend skeleton, PostgreSQL, basic tests
+* [ ] 0.5 Initialize repo (outside OneDrive), backend skeleton, SQLite, basic tests
 
 **Outcome:** A running project skeleton.
 
@@ -25,11 +25,11 @@
 **The sellable product. Read-only.**
 
 * [ ] 1.1 Seed messy data into HubSpot
-* [ ] 1.2 Pull Contacts, Companies, Deals from HubSpot into PostgreSQL
+* [ ] 1.2 Pull Contacts, Companies, Deals from HubSpot into SQLite
 * [ ] 1.3 Detectors: missing/invalid/inconsistent values, field fill rates, stale records
 * [ ] 1.4 Duplicate detection (simple rules) + precision/recall check on the synthetic data
 * [ ] 1.5 Issue list, priority, health score
-* [ ] 1.6 Client-readable audit report (HTML/PDF) with recommended fixes
+* [ ] 1.6 Client-readable audit report (HTML, printable to PDF) with recommended fixes
 * [ ] 1.7 Demo on the messy dataset
 
 **Outcome:** Connect HubSpot → get a scored, readable audit report.
