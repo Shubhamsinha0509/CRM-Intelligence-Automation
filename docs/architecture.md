@@ -13,6 +13,37 @@ System design for the sync pipeline, CRM integration boundary, and background jo
 3. The endpoint returns the `SyncRun` id immediately; the client polls it for status.
 4. The worker processes the job, updating the `SyncRun` as it progresses.
 
+```mermaid
+sequenceDiagram
+    actor Consultant
+    participant API as Sync Endpoint
+    participant DB as Postgres (SyncRun)
+    participant Queue as pg-boss
+    participant Worker
+    participant HubSpot
+
+    Consultant->>API: POST /sync
+    API->>DB: create SyncRun (status=queued)
+    API->>Queue: enqueue job
+    API-->>Consultant: SyncRun id
+    Queue->>Worker: dispatch job
+    Worker->>DB: status=running
+    loop per object type (contacts, companies, deals)
+        Worker->>HubSpot: GET /objects?after=cursor
+        HubSpot-->>Worker: page of records
+        Worker->>DB: upsert records, advance checkpoint cursor
+    end
+    alt daily rate cap hit
+        Worker->>DB: status=paused (checkpoint kept)
+    else burst cap hit (429 + Retry-After)
+        Worker->>Worker: sleep(Retry-After), retry call
+    else all pages complete
+        Worker->>DB: status=succeeded
+    end
+    Consultant->>API: GET /sync/:id (poll)
+    API-->>Consultant: current SyncRun status
+```
+
 **Incremental mechanism:** List API with cursor pagination (`after` param), not the Search API. Every sync run re-pages every object type in full; records are compared against the stored last-sync timestamp before writing. This makes "incremental" mean *fewer DB writes*, not *fewer API calls* — every run still re-fetches everything. Acceptable at MVP data volumes; avoids the Search API's stricter 5 req/s cap entirely.
 
 **Checkpointing:** `SyncRun` persists a pagination cursor per object type (contacts, companies, deals) as the job progresses. A retried or resumed job continues from the last checkpoint rather than restarting from page 1.
@@ -30,6 +61,19 @@ No proactive call-counting or pre-counting of daily usage — purely reactive to
 
 **Resume:** Triggering a sync for a scope with an existing `paused` `SyncRun` resumes it from checkpoint, unless that run is stale (default threshold TBD at implementation, ~24–48h), in which case a fresh run starts instead, since the underlying data has likely drifted.
 
+```mermaid
+stateDiagram-v2
+    [*] --> queued
+    queued --> running
+    running --> paused: daily rate cap signal
+    running --> succeeded: all pages complete
+    running --> failed: unrecoverable error
+    paused --> running: resume (same checkpoint)
+    paused --> queued: stale paused run\n(fresh run starts instead)
+    succeeded --> [*]
+    failed --> [*]
+```
+
 **`SyncRun` record (Postgres):** status (`queued` / `running` / `paused` / `succeeded` / `failed`), per-object-type counts and checkpoint cursors, quarantine list, timestamps. Distinct from pg-boss's internal job table, which is queue-infrastructure, not an audit surface.
 
 ## CRM Adapter Boundary
@@ -42,6 +86,38 @@ Rules enforced on the boundary:
 2. Nothing outside the client's module imports the HubSpot SDK.
 3. The client is injected (constructor/parameter) wherever it's used, so tests substitute a fake.
 4. Only the sync job and the approved write workflows call it. Detectors read exclusively from Postgres and never touch the adapter.
+
+```mermaid
+flowchart LR
+    subgraph HubSpot
+        API[HubSpot API]
+    end
+
+    subgraph Adapter["HubSpotClient module"]
+        Client[HubSpotClient]
+        RateLimit[Rate limiting and backoff]
+        Mapper["Mapper (SDK shape to domain type)"]
+    end
+
+    SyncJob[Sync job]
+    WriteFlows[Approved write workflows]
+    Detectors[Detectors]
+    Postgres[(Postgres)]
+    Quarantine[SyncRun quarantine list]
+
+    SyncJob --> Client
+    WriteFlows --> Client
+    Client <--> API
+    Client --> RateLimit
+    Client --> Mapper
+    Mapper -->|valid domain types| SyncJob
+    Mapper -->|structurally invalid| Quarantine
+    SyncJob -->|Prisma upsert| Postgres
+    Quarantine --> Postgres
+    Detectors -->|read only| Postgres
+```
+
+Detectors never call `HubSpotClient` directly — they only ever read from Postgres, per rule 4 above.
 
 **Validation in the mapper (SDK shape → domain type):**
 
@@ -62,6 +138,30 @@ Rules enforced on the boundary:
 - Sync jobs (now).
 - Approved write workflows — owner assignment, follow-up task creation, duplicate merge (task 2.x onward) — each with its own `ActionRun` record.
 - Report generation — queued too, but lower priority; can be deferred past MVP if time-boxed out.
+
+```mermaid
+flowchart TD
+    subgraph Producers
+        A[Sync trigger]
+        B[Approved write action]
+        C[Report request]
+    end
+
+    Queue[[pg-boss queue]]
+    Worker[Worker]
+
+    subgraph Records["Postgres audit records"]
+        SyncRun[(SyncRun)]
+        ActionRun[(ActionRun: owner_assignment / task_creation / merge)]
+    end
+
+    A -->|enqueue sync job| Queue
+    B -->|enqueue, ActionRun.id = dedupe key| Queue
+    C -->|enqueue report job, low priority| Queue
+    Queue --> Worker
+    Worker -->|sync jobs| SyncRun
+    Worker -->|write workflow jobs| ActionRun
+```
 
 **Idempotency is the application's responsibility, not a side effect of queuing:**
 
