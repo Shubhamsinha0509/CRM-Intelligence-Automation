@@ -1,6 +1,6 @@
 # CRM RevOps Intelligence & Automation Platform
 
-A HubSpot-centered system that audits CRM data and sales operations, recommends fixes, and safely automates approved changes. It improves a CRM without replacing it.
+A tool that audits a client's HubSpot CRM, shows what is wrong and what to fix first, and applies approved fixes. It improves a CRM without replacing it.
 
 Built as a college major project, a portfolio project, and a foundation for CRM/RevOps freelance work.
 
