@@ -14,7 +14,7 @@
 * [x] 0.2 Define problem, target client, MVP boundary
 * [x] 0.3 Study HubSpot objects/API; create free HubSpot account
 * [x] 0.4 Design synthetic messy dataset + evaluation plan
-* [ ] 0.5 Initialize repo (outside OneDrive), backend skeleton, SQLite, basic tests
+* [x] 0.5 Initialize repo (outside OneDrive), backend skeleton, SQLite, basic tests
 
 **Outcome:** A running project skeleton.
 

@@ -8,3 +8,14 @@ Built as a college major project, a portfolio project, and a foundation for CRM/
 
 * Product definition: [docs/project.md](docs/project.md)
 * Roadmap: [docs/roadmap.md](docs/roadmap.md)
+
+## Run
+
+```bash
+npm install
+cp .env.example .env
+npm run db:push     # create the SQLite database
+npm run dev         # http://localhost:3000/health
+npm test            # tests
+npm run typecheck   # type check
+```
